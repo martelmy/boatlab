@@ -1,4 +1,4 @@
-function [sys,x0,str,ts] = DiscKal(t,x,u,flag) %DiscKal(t,x,u,flag,data) if method 2 is used
+function [sys,x0,str,ts] = DiscKal(t,x,u,flag,data) %DiscKal(t,x,u,flag)if method 1 is used
 % Shell for the discrete kalman filter assignment in
 % TTK4115 Linear Systems.
 %
@@ -19,7 +19,7 @@ switch flag,
   %%%%%%%%%%%%%
   
   case 3,
-    sys=mdlOutputs(t,x,u); % mdlOutputs(t,x,u,data) if mathod 2 is used
+    sys=mdlOutputs(t,x,u); % mdlOutputs(t,x,u,data) if method 2 is used
   %%%%%%%%%%%%%
   % Terminate %
   %%%%%%%%%%%%%
@@ -40,22 +40,22 @@ switch flag,
 
 end
 
-function [sys,x0,str,ts]=mdlInitializeSizes %mdlInitializeSizes(data); if method 2 is used
+function [sys,x0,str,ts]=mdlInitializeSizes(data) %mdlInitializeSizes; if method 1 is used
 % This is called only at the start of the simulation. 
 
 sizes = simsizes; % do not modify
 
 sizes.NumContStates  = 0; % Number of continuous states in the system, do not modify
-sizes.NumDiscStates  = 0; % Number of discrete states in the system, modify. 
-sizes.NumOutputs     = 0; % Number of outputs, the hint states 2
-sizes.NumInputs      = 0; % Number of inputs, the hint states 2
+sizes.NumDiscStates  = 5; %V Number of discrete states in the system, modify. 
+sizes.NumOutputs     = 2; %V Number of outputs, the hint states 2
+sizes.NumInputs      = 2; %V Number of inputs, the hint states 2
 sizes.DirFeedthrough = 0; % 1 if the input is needed directly in the
 % update part
 sizes.NumSampleTimes = 1; % Do not modify  
 
 sys = simsizes(sizes); % Do not modify  
 
-x0  = []; % Initial values for the discrete states, modify
+x0  = [0 0 0 0 0]; %V Initial values for the discrete states, modify
 
 str = []; % Do not modify
 
@@ -64,7 +64,7 @@ ts  = [-1 0]; % Sample time. [-1 0] means that sampling is
 % minor steps.
 
 
-function sys=mdlUpdate(t,x,u),%mdlUpdate(t,x,u, data); if method 2 is used
+function sys=mdlUpdate(t,x,u, data)%mdlUpdate(t,x,u); if method 1 is used
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Update the filter covariance matrix and state etsimates here.
 % example: sys=x+u(1), means that the state vector after
@@ -72,7 +72,7 @@ function sys=mdlUpdate(t,x,u),%mdlUpdate(t,x,u, data); if method 2 is used
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 sys=[];
 
-function sys=mdlOutputs(t,x,u)% mdlOutputs(t,x,u,data) if mathod 2 is used
+function sys=mdlOutputs(t,x,u,data)% mdlOutputs(t,x,u) if mathod 1 is used
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Calculate the outputs here
 % example: sys=x(1)+u(2), means that the output is the first state+
