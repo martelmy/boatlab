@@ -24,47 +24,15 @@ hold on;
 plot(compass1.time, compass1.data,'--r');
 plot(compass.time, compass.data,'b');
 plot(bias.time, bias.data, 'm');
-plot(rudder_inp.time, rudder_inp.data, 'g');
+plot(rudder_inp.time, rudder_inp.data, 'terg')
 grid on;
 xlabel('time');
-ylabel('angle [deg]');
-legend('reference', 'compass', 'bias', 'rudder input');
-saveas(gcf,'5_5currentCompassKalman','epsc');
+ylabel('compass [deg]')
+saveas(gcf,'5_5currentCompassKalman','epsc')
 
 %%
-hold on;
-plot(rudder_inp.time, rudder_inp.data);
 plot(bias.time, bias.data);
 grid on;
-xlabel('time');
-ylabel('angle [deg]');
-legend('rudder', 'bias');
-saveas(gcf,'5_5erudderbias','epsc');
-
-%%
-% Measured compass and filtered compass plot
-hold on;
-plot(compass1.time, compass1.data,'--r');
-plot(compass.time, compass.data,'g');
-plot(compass_filt.time, compass_filt.data,'m');
-grid on;
-xlabel('time');
-ylabel('angle [deg]');
-legend('reference', 'measured compass', 'filtered compass');
-saveas(gcf,'5_5emesfiltcompass','epsc');
-
-%%
-% Actual wave and estimated wave plot
-hold on;
-plot(psi_w(1,:), psi_w(2,:), 'r');
-plot(psi_w_est.time, psi_w_est.data, 'b')'
-axis([0 700 -5 5]);
-grid on;
-xlabel('time');
-ylabel('angle [deg]');
-legend('actual wave', 'estimated wave');
-saveas(gcf, '5_5eactmeaswave','epsc');
-
 %%
 % Plotting North East of the boat
 plot(y.data,x.data);

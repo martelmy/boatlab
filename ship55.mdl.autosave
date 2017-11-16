@@ -116,7 +116,7 @@ Model {
   LastModifiedBy	  "martelm"
   ModifiedDateFormat	  "%<Auto>"
   LastModifiedDate	  "Thu Nov 16 14:09:32 2017"
-  RTWModifiedTimeStamp	  432742112
+  RTWModifiedTimeStamp	  432742336
   ModelVersionFormat	  "1.%<AutoIncrement:74>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
@@ -1182,7 +1182,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "175"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "87"
+    SIDHighWatermark	    "93"
     Block {
       BlockType		      SubSystem
       Name		      "Cargo ship"
@@ -1760,7 +1760,7 @@ Model {
       BlockType		      Memory
       Name		      "Memory"
       SID		      "59"
-      Position		      [160, 290, 190, 320]
+      Position		      [160, 285, 190, 315]
       ZOrder		      44
       ShowName		      off
     }
@@ -1768,8 +1768,16 @@ Model {
       BlockType		      Memory
       Name		      "Memory1"
       SID		      "81"
-      Position		      [160, 340, 190, 370]
+      Position		      [160, 315, 190, 345]
       ZOrder		      48
+      ShowName		      off
+    }
+    Block {
+      BlockType		      Memory
+      Name		      "Memory2"
+      SID		      "93"
+      Position		      [160, 345, 190, 375]
+      ZOrder		      54
       ShowName		      off
     }
     Block {
@@ -1916,7 +1924,7 @@ Model {
       Name		      "Subsystem2"
       SID		      "50"
       Ports		      [1, 1]
-      Position		      [210, 290, 240, 320]
+      Position		      [210, 285, 240, 315]
       ZOrder		      21
       BackgroundColor	      "cyan"
       ShowName		      off
@@ -1993,7 +2001,7 @@ Model {
       Name		      "Subsystem3"
       SID		      "54"
       Ports		      [1, 1]
-      Position		      [205, 240, 240, 270]
+      Position		      [210, 240, 240, 270]
       ZOrder		      45
       BlockMirror	      on
       BackgroundColor	      "cyan"
@@ -2146,6 +2154,83 @@ Model {
       }
     }
     Block {
+      BlockType		      SubSystem
+      Name		      "Subsystem5"
+      SID		      "89"
+      Ports		      [1, 1]
+      Position		      [210, 345, 240, 375]
+      ZOrder		      53
+      BackgroundColor	      "cyan"
+      ShowName		      off
+      RequestExecContextInheritance off
+      Variant		      off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		33
+	$ClassName		"Simulink.Mask"
+	Type			"radians to degrees"
+	Description		"Converts radians to degrees"
+	Display			"fprintf('R2D');"
+      }
+      System {
+	Name			"Subsystem5"
+	Location		[-7, 0, 829, 1047]
+	Open			off
+	PortBlocksUseCompactNotation off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  SID			  "90"
+	  Position		  [110, 103, 140, 117]
+	  ZOrder		  -1
+	  ShowName		  off
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain"
+	  SID			  "91"
+	  Position		  [180, 94, 245, 126]
+	  ZOrder		  -2
+	  Gain			  "180/pi"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  "92"
+	  Position		  [295, 103, 325, 117]
+	  ZOrder		  -3
+	  ShowName		  off
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  1
+	  SrcBlock		  "Gain"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  2
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "Gain"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
       BlockType		      Sum
       Name		      "Sum"
       SID		      "61"
@@ -2238,7 +2323,7 @@ Model {
       Name		      "To Workspace4"
       SID		      "68"
       Ports		      [1]
-      Position		      [295, 290, 355, 320]
+      Position		      [295, 285, 355, 315]
       ZOrder		      32
       ShowName		      off
       VariableName	      "bias"
@@ -2273,6 +2358,21 @@ Model {
       BlockMirror	      on
       ShowName		      off
       VariableName	      "compass_filt"
+      MaxDataPoints	      "inf"
+      SaveFormat	      "Timeseries"
+      Save2DSignal	      "3-D array (concatenate along third dimension)"
+      FixptAsFi		      on
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace7"
+      SID		      "88"
+      Ports		      [1]
+      Position		      [295, 345, 355, 375]
+      ZOrder		      52
+      ShowName		      off
+      VariableName	      "psi_w_est"
       MaxDataPoints	      "inf"
       SaveFormat	      "Timeseries"
       Save2DSignal	      "3-D array (concatenate along third dimension)"
@@ -2574,7 +2674,6 @@ Model {
       ZOrder		      72
       SrcBlock		      "matlab function"
       SrcPort		      1
-      Points		      [0, 5]
       DstBlock		      "Memory"
       DstPort		      1
     }
@@ -2614,14 +2713,14 @@ Model {
       SrcPort		      1
       Points		      [20, 0]
       Branch {
+	ZOrder			228
+	DstBlock		"To Workspace4"
+	DstPort			1
+      }
+      Branch {
 	ZOrder			158
 	DstBlock		"Sum1"
 	DstPort			2
-      }
-      Branch {
-	ZOrder			152
-	DstBlock		"To Workspace4"
-	DstPort			1
       }
     }
     Line {
@@ -2642,7 +2741,7 @@ Model {
       ZOrder		      155
       SrcBlock		      "Subsystem3"
       SrcPort		      1
-      Points		      [-363, 0; 0, 50]
+      Points		      [-368, 0; 0, 50]
       DstBlock		      "Zero-Order\nHold1"
       DstPort		      1
     }
@@ -2650,7 +2749,6 @@ Model {
       ZOrder		      186
       SrcBlock		      "matlab function"
       SrcPort		      2
-      Points		      [0, 25]
       DstBlock		      "Memory1"
       DstPort		      1
     }
@@ -2680,7 +2778,7 @@ Model {
       ZOrder		      209
       SrcBlock		      "Memory1"
       SrcPort		      1
-      Points		      [9, 0; 0, 45]
+      Points		      [6, 0; 0, 70]
       DstBlock		      "Subsystem4"
       DstPort		      1
     }
@@ -2700,6 +2798,27 @@ Model {
 	DstBlock		"Sum"
 	DstPort			1
       }
+    }
+    Line {
+      ZOrder		      229
+      SrcBlock		      "matlab function"
+      SrcPort		      3
+      DstBlock		      "Memory2"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      230
+      SrcBlock		      "Subsystem5"
+      SrcPort		      1
+      DstBlock		      "To Workspace7"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      231
+      SrcBlock		      "Memory2"
+      SrcPort		      1
+      DstBlock		      "Subsystem5"
+      DstPort		      1
     }
   }
 }
